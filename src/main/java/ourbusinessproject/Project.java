@@ -1,5 +1,6 @@
 package ourbusinessproject;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -8,7 +9,13 @@ import javax.validation.constraints.NotNull;
  *
  * @author matthieu.batifol
  */
+@Entity
+@Table(name = "project")
 public class Project {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     /**
      * Titre du projet
@@ -16,11 +23,13 @@ public class Project {
     // NotEmpty = ni vide ni null
     @NotNull
     @NotBlank
+    @Column(name = "title")
     private String title;
 
     /**
      * Description du projet
      */
+    @Column(name = "description")
     private String description;
 
     /**
