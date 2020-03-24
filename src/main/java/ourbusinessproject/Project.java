@@ -33,6 +33,13 @@ public class Project {
     private String description;
 
     /**
+     * Entreprise du projet
+     */
+    @NotNull
+    @Column(name = "enterprise")
+    private Enterprise enterprise;
+
+    /**
      * Change le titre du projet
      */
     public void setTitle(String title) {
@@ -60,5 +67,13 @@ public class Project {
 
     public String getDescription() {
         return description;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
     }
 }
