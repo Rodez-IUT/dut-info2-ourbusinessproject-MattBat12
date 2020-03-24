@@ -18,9 +18,19 @@ public class Project {
     private Enterprise enterprise;
 
     public Project() {
+
     }
 
     public Project(Enterprise enterprise) {
+        this.enterprise = enterprise;
+        if (enterprise != null){
+            this.enterprise.addProject(this);
+        }
+    }
+
+    public Project(String title, String description, Enterprise enterprise) {
+        this.title = title;
+        this.description = description;
         this.enterprise = enterprise;
         if (enterprise != null){
             this.enterprise.addProject(this);
