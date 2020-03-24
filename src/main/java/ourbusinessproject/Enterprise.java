@@ -1,43 +1,31 @@
 package ourbusinessproject;
 
-import net.bytebuddy.implementation.bind.annotation.Empty;
-import org.hibernate.validator.constraints.Length;
-//import org.hibernate.validator.constraints.NotEmpty;
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
-//import java.util.regex.Matcher;
-//import java.util.regex.Pattern;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "enterprise")
 public class Enterprise {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    /** Nom de l'entreprise */
     @NotEmpty
-    @Column(name = "name")
     private String name;
-
-    /** Description de l'entreprise */
-    @Length(min = 10)
-    @Column(name = "description")
+    @Size(min = 10)
     private String description;
-
-    /** Nom du contact */
     @NotEmpty
-    @Column(name = "contact_name")
     private String contactName;
-
-    /** Adresse mail de contact */
-    @Email
-    @NotEmpty
-    @Column(name = "contact_email")
+    @NotEmpty @Email
     private String contactEmail;
+
+    @OneToMany
+    private Project projects;
 
     public String getName() {
         return name;
@@ -75,7 +63,11 @@ public class Enterprise {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Project getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Project projects) {
+        this.projects = projects;
     }
 }
