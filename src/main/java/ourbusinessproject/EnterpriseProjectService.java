@@ -13,13 +13,6 @@ public class EnterpriseProjectService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public EnterpriseProjectService() {
-    }
-
-    public EnterpriseProjectService(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
     public void save(Object object){
         this.entityManager.persist(object);
         this.entityManager.flush();

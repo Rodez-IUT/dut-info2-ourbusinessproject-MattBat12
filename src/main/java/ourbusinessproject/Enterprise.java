@@ -26,10 +26,10 @@ public class Enterprise {
     @Email
     private String contactEmail;
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "enterprise")
     private List<Project> projects;
 
-    public Enterprise(){
+    public Enterprise() {
         this.projects = new ArrayList<>();
     }
 
@@ -71,6 +71,10 @@ public class Enterprise {
 
     public void addProject(Project project){
         this.projects.add(project);
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     public List<Project> getProjects() {
