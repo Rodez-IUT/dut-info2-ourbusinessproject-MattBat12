@@ -64,11 +64,17 @@ public class Enterprise {
         return id;
     }
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     public Collection<Project> getProjects() {
         return projects;
     }
 
     public void setProjects(Collection<Project> projects) {
         this.projects = projects;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
