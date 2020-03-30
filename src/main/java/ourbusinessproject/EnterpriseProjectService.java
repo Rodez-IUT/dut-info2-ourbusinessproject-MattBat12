@@ -13,11 +13,6 @@ public class EnterpriseProjectService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void save(Object object){
-        this.entityManager.persist(object);
-        this.entityManager.flush();
-    }
-
     public EntityManager getEntityManager() {
         return entityManager;
     }
@@ -26,18 +21,28 @@ public class EnterpriseProjectService {
         this.entityManager = entityManager;
     }
 
-    public Project findProjectById(Long anId) {
+    public void save(Project project) {
+        entityManager.persist(project.getEnterprise());
+        entityManager.persist(project);
+        entityManager.flush();
+    }
 
-        return this.entityManager.find(Project.class, anId);
+    public void save(Enterprise enterprise) {
+        entityManager.persist(enterprise);
+        entityManager.flush();
+    }
+
+    public Project findProjectById(Long anId) {
+        return entityManager.find(Project.class, anId);
     }
 
     public Enterprise findEnterpriseById(Long anId) {
-        return this.entityManager.find(Enterprise.class, anId);
+        return entityManager.find(Enterprise.class, anId);
     }
 
     public List<Project> findAllProjects() {
-        String query = "SELECT p FROM Project p ORDER BY p.title";
-        TypedQuery<Project> queryObj = entityManager.createQuery(query, Project.class);
+        String query = "SELECT p FROM Project p ORDER BY p.title" ;
+        TypedQuery<Project> queryObj = entityManager.createQuery(query,Project.class);
         return queryObj.getResultList();
     }
 }

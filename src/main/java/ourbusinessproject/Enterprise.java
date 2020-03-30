@@ -1,37 +1,32 @@
 package ourbusinessproject;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.*;
+import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
 public class Enterprise {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     @NotEmpty
     private String name;
-    @NotEmpty
-    @Length(min = 10, message = "Trop court")
+    @Size(min = 10)
     private String description;
     @NotEmpty
     private String contactName;
-    @NotEmpty
-    @Email
+    @NotEmpty @Email
     private String contactEmail;
-    @NotNull
-    @OneToMany(mappedBy = "enterprise")
-    private List<Project> projects;
 
-    public Enterprise() {
-        this.projects = new ArrayList<>();
-    }
+    @OneToMany(mappedBy = "enterprise")
+    private Collection<Project> projects;
 
     public String getName() {
         return name;
@@ -66,18 +61,14 @@ public class Enterprise {
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
-    public void addProject(Project project){
-        this.projects.add(project);
+    public Collection<Project> getProjects() {
+        return projects;
     }
 
-    public void setProjects(List<Project> projects) {
+    public void setProjects(Collection<Project> projects) {
         this.projects = projects;
-    }
-
-    public List<Project> getProjects() {
-        return projects.isEmpty() ? null : projects;
     }
 }

@@ -1,6 +1,5 @@
 package ourbusinessproject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -8,7 +7,6 @@ import javax.annotation.PostConstruct;
 @Component
 public class Bootstrap {
 
-    // @Autowired
     private InitializationService initializationService;
 
     public Bootstrap(InitializationService initializationService) {
@@ -19,18 +17,13 @@ public class Bootstrap {
     public void init() {
         try {
             initializationService.initProjects();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public InitializationService getInitializationService() {
         return initializationService;
     }
-
-    public void setInitializationService(InitializationService initializationService) {
-        this.initializationService = initializationService;
-    }
-
-
 }
